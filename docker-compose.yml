@@ -73,7 +73,7 @@ services:
     image: rabbitmq:alpine
 
   txs-worker-indexer: &txs-worker
-    image: safeglobal/safe-transaction-service:${TXS_VERSION}
+    image: hemilabs/safe-transaction-service:${TXS_VERSION}
     env_file:
       - container_env_files/txs.env
     environment:
@@ -107,7 +107,7 @@ services:
         condition: service_healthy
 
   txs-web:
-    image: safeglobal/safe-transaction-service:${TXS_VERSION}
+    image: hemilabs/safe-transaction-service:${TXS_VERSION}
     env_file:
       - container_env_files/txs.env
     environment:
@@ -147,7 +147,7 @@ services:
     <<: *redishealthcheck
 
   cgw-web:
-    image: safeglobal/safe-client-gateway-nest:${CGW_VERSION}
+    image: hemilabs/safe-client-gateway-nest:${CGW_VERSION}
     env_file:
       - container_env_files/cgw.env
     depends_on:
@@ -155,7 +155,7 @@ services:
         condition: service_healthy
 
   ui:
-    image: safeglobal/safe-wallet-web:${UI_VERSION}
+    image: hemilabs/safe-wallet-web:${UI_VERSION}
     env_file:
       - container_env_files/ui.env
     depends_on:
