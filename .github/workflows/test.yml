@@ -2,8 +2,7 @@ name: Python CI
 on:
   push:
     branches:
-      - master
-      - develop
+      - hemi-main
   pull_request:
 
 jobs:
