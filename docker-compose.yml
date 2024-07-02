@@ -131,10 +131,11 @@ services:
 
   # Safe Config Service
   cfg-web:
-    image: safeglobal/safe-config-service:${CFG_VERSION}
+    image: hemilabs/safe-config-service:${CFG_VERSION}
     tty: true
     volumes:
       - nginx-shared-cfg:/nginx
+      - ./data/cfg-media:/app/src/media
     env_file:
       - container_env_files/cfg.env
     depends_on:
