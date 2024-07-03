@@ -1,0 +1,30 @@
+name: Safe Deployment
+
+on: 
+    workflow_dispatch:
+
+jobs:
+    blockscout_build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+
+            - name: Deploy via docker-compose and ssh
+              uses: appleboy/ssh-action@master
+              with:
+                  host: ${{ secrets.SSH_HOST }}
+                  username: ${{ secrets.SSH_USER }}
+                  key: ${{ secrets.SSH_KEY }}
+                  port: ${{ secrets.SSH_PORT }}
+                  script: |
+                    cd ~/safe-infrastructure
+                    docker compose down --remove-orphans
+                    if [ -d ~/safe-infrastructure ]; then
+                        TIMESTAMP=$(date +%Y%m%d%H%M%S)
+                        sudo tar -czvf ~/backup/safe-infrastructure_$TIMESTAMP.tar.gz ~/safe-infrastructure
+                    fi
+                    cd ~/safe-infrastructure
+                    git pull
+                    cd ~/safe-infrastructure
+                    docker compose up -d
