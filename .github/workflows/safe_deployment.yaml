@@ -27,4 +27,5 @@ jobs:
                     cd ~/safe-infrastructure
                     git pull
                     cd ~/safe-infrastructure
+                    cp .env.sample .env
                     docker compose up -d
