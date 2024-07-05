@@ -13,10 +13,10 @@ jobs:
             - name: Deploy via docker-compose and ssh
               uses: appleboy/ssh-action@master
               with:
-                  host: ${{ secrets.SSH_HOST }}
-                  username: ${{ secrets.SSH_USER }}
-                  key: ${{ secrets.SSH_KEY }}
-                  port: ${{ secrets.SSH_PORT }}
+                  host: ${{ secrets.SSH_SAFE_HOST }}
+                  username: ${{ secrets.SSH_SAFE_USER }}
+                  key: ${{ secrets.SSH_SAFE_KEY }}
+                  port: ${{ secrets.SSH_SAFE_PORT }}
                   script: |
                     cd ~/safe-infrastructure
                     docker compose down --remove-orphans
