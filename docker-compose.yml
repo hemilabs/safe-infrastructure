@@ -56,7 +56,7 @@ services:
       - ./data/events-db:/var/lib/postgresql/data
     <<: *pghealthcheck
 
-  # Safe Transaction Service
+  # Safe Transaction Service Sepolia
   txs-db:
     image: postgres:14-alpine
     command: -c 'max_connections=250'
@@ -65,6 +65,7 @@ services:
     volumes:
       - ./data/txs-db:/var/lib/postgresql/data
     <<: *pghealthcheck
+
   txs-redis:
     image: redis:alpine
     <<: *redishealthcheck
@@ -192,6 +193,7 @@ services:
     volumes:
       - ./data/txs-db-mainnet:/var/lib/postgresql/data
     <<: *pghealthcheck
+
   txs-redis-mainnet:
     image: redis:alpine
     <<: *redishealthcheck
