@@ -1,6 +1,7 @@
 volumes:
   nginx-shared-txs:
   nginx-shared-cfg:
+  nginx-shared-txs-mainnet:
 
 x-healthcheck-db-template: &pghealthcheck
   healthcheck:
@@ -32,6 +33,7 @@ services:
     volumes:
       - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - nginx-shared-txs:/nginx-txs
+      - nginx-shared-txs-mainnet:/nginx-txs-mainnet
       - nginx-shared-cfg:/nginx-cfg
     depends_on:
       - txs-web
@@ -246,7 +248,7 @@ services:
         condition: service_healthy
     working_dir: /app
     volumes:
-      - nginx-shared-txs:/nginx
+      - nginx-shared-txs-mainnet:/nginx
     command: docker/web/run_web.sh
 
   txs-scheduler-mainnet:
